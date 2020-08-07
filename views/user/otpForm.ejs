@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8 col-md-6 mx-auto">
+      <div class="card">
+        <div class="card-header">
+          <h4>Verify OTP</h4>
+        </div>
+        <div class="card-body primary">
+          <form action="/user/otpVerify" method="POST">          
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="6-digits otp" name="otp" aria-describedby="basic-addon2" required size="6">
+              <div class="input-group-append">
+                <button class="btn btn-success" type="submit">Verify</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

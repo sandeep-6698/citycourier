@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="row">
+      <div class="col-sm-8 col-md-6 mx-auto">
+        <div class="card">
+          <div class="card-header">
+            <h4> Forgot password</h4>
+          </div>
+          <div class="card-body primary">
+            <form action="/user/forgotPassword" method="POST">  
+                <%
+                if(email === true){ %>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Email address" name="email" aria-describedby="basic-addon2" required>
+                        <div class="input-group-append">
+                          <button class="btn btn-success" type="submit">Send</button>
+                        </div>
+                      </div>
+                <% } else {%>
+                    <div class="form-group">
+                        <input type="text" name="otp" class="form-control" placeholder="6-digits OTP" size="6" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" class="form-control" placeholder="Enter password" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="confirmPassword" class="form-control" placeholder="Confirm password" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit"class="btn btn-success btn-sm" value="Change">
+                    </div>
+                    <% }%>        
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
