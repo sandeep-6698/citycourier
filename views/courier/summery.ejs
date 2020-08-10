@@ -1,12 +1,19 @@
 <div class="container">
     <div class="row">
-        <% data.map((item)=>{ 
+        <% data.map((item,index)=>{ 
+            
             %>
         <div class="col-sm-6 col-md-6 my-3">
             <div class="card">
                 <div class="card-body">
-                    <p><b>Ordered On:</b> <%=  %></p>
-                <p><b>Status :</b><%= item._id%></p> 
+                  <p><b>Tracking id:</b> <%=item._id%></p> 
+                  <p><b>Ordered On:</b> <%=script.getDate(item.status.map(status => status.orderd))%></p>
+                <p>
+                  <b>Status :</b>
+                  <span class="<%= item.status.map(status => status.deliverd)!= '' ? "text-primary": "text-success" %>">
+                    <%= item.status.map(status => status.deliverd)!= '' ? "Deliverd": "Panding..." %>
+                  </span>
+                </p> 
                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#<%= item._id%>">
                     Detail
                   </button>  
@@ -18,17 +25,48 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+          <h5 class="modal-title">Item details</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <%= item%>
+          <table class="large">
+            <tr>
+              <td>Item: </td>
+              <td> <%= item.courier.name%></td>
+            </tr>
+            <tr>
+              <td>Type: </td>
+              <td><%= item.courier.type%></td>
+            </tr>
+            <tr>
+              <td>Weight: </td>
+              <td><%= item.courier.weight%> gm.</td>
+            </tr>
+            <tr>
+              <td>Size: </td>
+              <td><%= item.courier.itemHeight * item.courier.itemWidth %>cm<sup>2</sup></td>
+            </tr>
+          </table>
+          <p style="font-weight: bolder;" class="mt-1 mb-0">To:</p> 
+          <table class="ml-3">
+            <tr>
+              <td>Name: </td>
+              <td><%= item.courier.to.name%></td>
+            </tr>
+            <tr>
+              <td>Mobile: </td>
+              <td><%= item.courier.to.mobile%></td>
+            </tr>
+            <tr>
+              <td>Address: </td>
+              <td><%= item.courier.to.address%></td>
+            </tr>
+          </table>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
         </div>
       </div>
     </div>
@@ -37,5 +75,5 @@
         <% })%>
     </div>
 </div>
-<!-- Button trigger modal -->
+
 

@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const Courier = require('../model/Courier');
 const Status = require('../model/Status');
+const helper  = require('../helper');
+const script = require('./script')
+const ObjectId = mongoose.Types.ObjectId;
 const stripe = require('stripe')('sk_test_51HBZOxDIoJphelYv9NFkRgwDKko4wyjtfBnIU0VkheZOLRPFt35HlzTYfJOxn3T1uCu1CdSv1N6q1D4XvgbZh3sP00ZiGzkIKR') 
 exports.getAll = (req,res)=>{
     Courier.find({user_id: req.params.user_id})
@@ -114,16 +117,30 @@ exports.updateStatus = (req,res) => {
         }); 
     }
     exports.summery = (req,res)=>{
-        Status.find({})
-        .populate('courier_id','','Courier')
-        .then((data)=>{
-            console.log(data.map((data)=>{
-                data.map(item => item.status)
-            }))
-            res.render('index',{title:'summery',page:'courier/summery',data:data})
-       })
-       .catch((err)=>{
-
-       })
+    //     Status.find({})
+    //     .populate('courier_id','','Courier')
+    //     .then((data)=>{
+    //         //var user_id = data.map(data => data.courier_id.user_id)
+    //         //data = data.filter( (data,index,user_id) => user_id[index] === req.session.user.user_id)
+    //         //    orderd =  data.map(data => data.status.map(status => helper.getDate(status.orderd)))
+    //        console.log(data);
+    //        //res.render('index',{title:'summery',page:'courier/summery',data:data, script: script})
+    //    })
+    //    .catch((err)=>{
+    //     console.log(err)
+    //    })
+    Status.aggregate([{
+        $lookup:{
+            from:'couriers',
+            as: 'courier',
+            localField: 'courier_id',
+            foreignField : '_id'            
+        }
+    },
+    {$unwind: "$courier"},
+    { $match: { "courier.user_id": ObjectId(req.session.user._id) } }
+]).exec((err,data)=>{
+    res.render('index',{title:'summery',page:'courier/summery',data:data, script: script})
+    })
 
     }

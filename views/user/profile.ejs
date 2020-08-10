@@ -16,9 +16,9 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-md-2">
-                <a href="#" class="profile-edit-btn" name="btnAddMore">Edit Profile</a>
-            </div>
+            <!-- <div class="col-md-2">
+                <a href="updateProfile/<%= locals.user._id%>" class="profile-edit-btn" name="btnAddMore">Edit Profile</a>
+            </div> -->
         </div>
         <div class="row">
             
@@ -38,7 +38,8 @@
                                         <label>Name</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p><%= locals.user.name%></p>
+                                        <p><%= locals.user.name%><span>
+                                        <button type="button" id="Name" class="btn btn-sm btn-light ml-2 editButton">edit</button></span></p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -54,15 +55,20 @@
                                         <label>Phone</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p><%= locals.user.mobile%></p>
+                                        <p><%= locals.user.mobile%><span>
+                                            <button type="button" id="Mobile" class="btn btn-sm btn-light ml-2 editButton">edit</button></span></p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label>Password</label>
                                     </div>
-                                    <div class="col-md-6">
-                                        <p><%= locals.user.password%></p>
+                                    <div class="col-md-6"> 
+                                        <p><%= "******"%> 
+                                            <span>
+                                                <button type="button" onclick="location.href ='/user/forgotPassword' " class="btn btn-sm btn-light ml-2 editProfileButton">edit</button>
+                                            </span>
+                                        </p>
                                     </div>
                                 </div>
                     </div>
@@ -137,50 +143,23 @@
         </div>
     </form>           
 </div>
-<!-- <div class="container">
-    <form>
-        <div class="card m-auto">
-            <div class="card-body">
-                <div class="value">
-                    <p><b>Name:</b><br /></p>
-                    <input type="text" name="name" value="<%= locals.user.name %>" disabled/>
-                </div>
-                <div class="btnEdit">
-                    <button type="button" class="btn btn-primary btn-sm">Edit</button>
-                </div>
+
+<div id="update-modal">
+    <div class="modal-sm custom-modal-sm  mx-auto">
+      <div class="modal-content custom-modal-contant">
+          <div class="modal-body">
+           <form>
+            <div class="form-group">
+                <label id="lable" ></label>
+             <input type="text" class="form-control" id="input">
             </div>
-            <hr />
-            <div class="card-body">
-                <div class="value">
-                    <p><b>Mobile:</b><br /></p>
-                    <input type="text" name="mobile" value="<%= locals.user.mobile %>" disabled/>
-                </div>
-                <div class="btnEdit">
-                    <button type="button" class="btn btn-primary btn-sm">Edit</button>
-                </div>
+            <div class="form-group">
+             <div>
+                 <button type="button" class="btn btn-secondary btn-sm closeButton">Close</button>
+                 <button type="button" class="btn btn-success btn-sm submitChange">Submit</button>
             </div>
-            <hr />
-            <div class="card-body">
-                <div class="value">
-                    <p><b>Email:</b><br /></p>
-                    <input type="text" name="email" value="<%= locals.user.email %>" disabled/>
-                </div>
-                <div class="btnEdit">
-                    <button type="button" class="btn btn-primary btn-sm">Edit</button>
-                </div>
-            </div>
-            <hr />
-            <div class="card-body">
-                <div class="value">
-                    <p><b>Password:</b><br /></p>
-                    <input type="text" name="password" value="<%= locals.user.password %>" disabled/>
-                </div>
-                <div class="btnEdit">
-                    <button type="button" class="btn btn-primary btn-sm">Edit</button>
-                </div>
-            </div>
-            <hr />
-        </div>
-        <button type="submit" class="btn btn-primary btn-sm m-2">Update</button>
-    </form>
-</div> -->
+            </form>
+          </div>
+      </div>
+    </div>
+  </div>

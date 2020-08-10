@@ -23,6 +23,7 @@ router.get('/signout',user.signout);
 router.post('/signin', user.signin);
 router.post('/otpVerify',user.otpVerify);
 router.post('/signup', user.signup);
+router.post('/updateProfile', user.update);
 
 
 /* api routers */

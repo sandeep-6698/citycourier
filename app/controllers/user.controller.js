@@ -68,9 +68,17 @@ exports.update = (req, res) => {
   if (req.body.password) data.password = req.body.password;
   if (req.body.email) data.email = req.body.email;
   if (req.body.mobile) data.mobile = req.body.mobile;
-  User.findByIdAndUpdate({ _id: req.params.id }, data, (err, data) => {
-    res.json(data);
-  });
+  if(req.url === '/updateProfile')
+  {
+    return data;
+  }
+  else
+  {
+    return "Hi";
+  }
+    User.findByIdAndUpdate({ _id: req.params.id }, data, (err, data) => {
+      res.json(data);
+    });
 };
 exports.getAll = (req, res) => {
   User.find(req.params.id ? { _id: req.params.id } : {}, (err, data) => {
